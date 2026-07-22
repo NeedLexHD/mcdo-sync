@@ -3,70 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>McDo Sync - Ultimate Edition</title>
+<title>McDo Sync - Neon Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --mcd-red: #da291c;
-    --mcd-yellow: #ffc72c;
-    --mcd-dark: #121212;
-    --glow-yellow: rgba(255, 199, 44, 0.6);
-    --glow-red: rgba(218, 41, 28, 0.6);
+    --mcd-yellow: #ffb700;
+    --mcd-red: #ff2222;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     min-height: 100vh;
-    background: radial-gradient(circle at center, #261111 0%, var(--mcd-dark) 100%);
+    /* Utilisation directe de ton image uploadée sur GitHub en arrière-plan */
+    background: linear-gradient(rgba(10, 4, 2, 0.6), rgba(10, 4, 2, 0.75)), 
+                url('./96241d07-273b-444f-8b1d-87a619c7051b.png') no-repeat center center fixed;
+    background-size: cover;
     font-family: 'Rajdhani', sans-serif;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    overflow-x: hidden;
+    position: relative;
   }
 
-  /* Effet de grille cyberpunk animée en arrière-plan */
-  body::before {
+  /* Effet de pulsation lumineuse globale qui fait vibrer les néons de ton image */
+  body::after {
     content: "";
     position: absolute;
-    width: 200%; height: 200%;
-    background-image: linear-gradient(rgba(255, 199, 44, 0.03) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255, 199, 44, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: gridMove 20s linear infinite;
-    z-index: -1;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(255,183,0,0.18) 0%, rgba(255,34,34,0.08) 60%, transparent 100%);
+    pointer-events: none;
+    animation: neonPulseBg 3s ease-in-out infinite alternate;
   }
 
-  @keyframes gridMove {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(40px); }
+  @keyframes neonPulseBg {
+    0% { opacity: 0.3; filter: brightness(0.9); }
+    100% { opacity: 1; filter: brightness(1.25); }
   }
 
   .card {
     width: 100%;
     max-width: 440px;
-    background: rgba(18, 18, 18, 0.85);
-    backdrop-filter: blur(16px);
+    background: rgba(12, 6, 3, 0.82);
+    backdrop-filter: blur(14px);
     border: 2px solid var(--mcd-yellow);
     border-radius: 24px;
     padding: 40px 30px;
     text-align: center;
     box-shadow: 
-      0 0 30px var(--glow-yellow),
-      inset 0 0 20px rgba(255, 199, 44, 0.1);
+      0 0 35px rgba(255, 183, 0, 0.4),
+      inset 0 0 20px rgba(255, 183, 0, 0.1);
     position: relative;
-    animation: cardPulse 4s ease-in-out infinite alternate;
+    z-index: 2;
+    animation: cardGlow 4s ease-in-out infinite alternate;
   }
 
-  @keyframes cardPulse {
-    0% { box-shadow: 0 0 20px var(--glow-yellow), inset 0 0 15px rgba(255, 199, 44, 0.1); }
-    100% { box-shadow: 0 0 45px rgba(255, 199, 44, 0.9), inset 0 0 25px rgba(255, 199, 44, 0.25); }
+  @keyframes cardGlow {
+    0% { box-shadow: 0 0 25px rgba(255, 183, 0, 0.3), inset 0 0 15px rgba(255, 183, 0, 0.1); }
+    100% { box-shadow: 0 0 50px rgba(255, 183, 0, 0.8), 0 0 20px rgba(255, 34, 34, 0.4); }
   }
 
-  /* Badge iconique McDo flottant */
   .badge-mcd {
     font-size: 42px;
     margin-bottom: 10px;
@@ -75,8 +73,8 @@
   }
 
   @keyframes floatBurger {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(5deg); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
 
   h1 { 
@@ -85,13 +83,16 @@
     font-weight: 900;
     margin-bottom: 5px;
     letter-spacing: 2px;
-    color: var(--mcd-yellow);
-    text-shadow: 0 0 10px var(--glow-yellow), 0 0 20px var(--mcd-red);
+    color: #fff;
+    text-shadow: 
+      0 0 10px #fff,
+      0 0 20px var(--mcd-yellow),
+      0 0 40px var(--mcd-red);
   }
 
   p.subtitle { 
     font-size: 15px; 
-    color: #ffebad; 
+    color: #ffcc99; 
     margin-bottom: 30px; 
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -106,40 +107,38 @@
   input {
     width: 100%;
     padding: 16px 20px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 2px solid rgba(255, 199, 44, 0.4);
+    background: rgba(0, 0, 0, 0.75);
+    border: 2px solid rgba(255, 183, 0, 0.4);
     border-radius: 14px;
     font-family: 'Rajdhani', sans-serif;
     font-size: 17px;
     font-weight: 700;
     color: var(--mcd-yellow);
     outline: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     text-align: center;
     letter-spacing: 1px;
   }
 
   input::placeholder { 
     color: rgba(255, 255, 255, 0.3); 
-    font-weight: 600;
   }
 
   input:focus {
     border-color: var(--mcd-yellow);
-    box-shadow: 0 0 20px var(--glow-yellow);
-    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 183, 0, 0.6);
   }
 
   button {
     width: 100%;
     padding: 18px;
-    background: linear-gradient(135deg, var(--mcd-yellow), #ffa200);
-    border: none;
+    background: transparent;
+    border: 2px solid var(--mcd-yellow);
     border-radius: 14px;
     font-family: 'Orbitron', sans-serif;
     font-size: 16px;
     font-weight: 900;
-    color: #000;
+    color: var(--mcd-yellow);
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -148,29 +147,14 @@
     justify-content: center;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 4px 20px rgba(255, 199, 44, 0.4);
-    position: relative;
-    overflow: hidden;
-  }
-
-  button::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%; width: 200%; height: 200%;
-    background: linear-gradient(transparent, rgba(255,255,255,0.4), transparent);
-    transform: rotate(45deg) translateX(-100%);
-    transition: 0.6s;
-  }
-
-  button:hover::after {
-    transform: rotate(45deg) translateX(100%);
+    box-shadow: 0 0 15px rgba(255, 183, 0, 0.3);
   }
 
   button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 6px 30px var(--glow-yellow), 0 0 20px var(--mcd-red);
-    background: #fff;
-    color: var(--mcd-red);
+    background: var(--mcd-yellow);
+    color: #000;
+    box-shadow: 0 0 30px var(--mcd-yellow), 0 0 60px var(--mcd-red);
+    border-color: #fff;
   }
 
   button:active { 
@@ -180,10 +164,10 @@
   .instructions {
     margin-top: 25px;
     font-size: 14px;
-    color: #ffebad;
+    color: #ffcc99;
     line-height: 1.6;
-    background: rgba(218, 41, 28, 0.15);
-    border: 1px solid rgba(255, 199, 44, 0.25);
+    background: rgba(255, 34, 34, 0.1);
+    border: 1px solid rgba(255, 183, 0, 0.2);
     padding: 14px;
     border-radius: 12px;
     text-align: left;
@@ -197,7 +181,7 @@
 </head>
 <body>
 <div class="card">
-  <div class="badge-mcd">🍟🍔</div>
+  <div class="badge-mcd">🍔🍟</div>
   <h1>MC_SYNC</h1>
   <p class="subtitle">Le planning officiel du Crew</p>
 
@@ -240,6 +224,7 @@
     var originalText = btn.innerHTML;
     btn.innerHTML = '⚡ SYNCHRONISATION...';
     btn.style.background = 'var(--mcd-red)';
+    btn.style.borderColor = 'var(--mcd-red)';
     btn.style.color = '#fff';
     btn.style.boxShadow = '0 0 30px var(--mcd-red)';
     
