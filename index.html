@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McDo Sync</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-yellow: #ffb700;
+    --neon-orange: #ff5500;
+    --neon-red: #ff2222;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    min-height: 100vh;
+    background: linear-gradient(rgba(10, 4, 2, 0.7), rgba(10, 4, 2, 0.85)), 
+                url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Rajdhani', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(15, 8, 5, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 183, 0, 0.3);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 
+      0 0 25px rgba(255, 85, 0, 0.25),
+      inset 0 0 15px rgba(255, 183, 0, 0.05);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: var(--neon-yellow);
+    box-shadow: 0 0 15px var(--neon-yellow), 0 0 30px var(--neon-orange);
+    border-radius: 10px;
+  }
+
+  h1 { 
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px; 
+    font-weight: 900;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px var(--neon-yellow),
+      0 0 20px var(--neon-orange),
+      0 0 40px var(--neon-orange);
+  }
+
+  p.subtitle { 
+    font-size: 16px; 
+    color: #ffcc99; 
+    margin-bottom: 35px; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .input-group {
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  input {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 183, 0, 0.2);
+    border-radius: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    color: var(--neon-yellow);
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  input::placeholder { 
+    color: rgba(255, 255, 255, 0.3); 
+  }
+
+  input:focus {
+    border-color: var(--neon-yellow);
+    box-shadow: 
+      0 0 12px rgba(255, 183, 0, 0.3),
+      inset 0 0 10px rgba(255, 183, 0, 0.1);
+  }
+
+  button {
+    width: 100%;
+    padding: 18px;
+    background: transparent;
+    border: 2px solid var(--neon-yellow);
+    border-radius: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--neon-yellow);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 
+      0 0 10px rgba(255, 183, 0, 0.2),
+      inset 0 0 10px rgba(255, 183, 0, 0.1);
+  }
+
+  button:hover {
+    background: var(--neon-yellow);
+    color: #000;
+    box-shadow: 
+      0 0 25px var(--neon-yellow),
+      0 0 50px var(--neon-orange);
+    text-shadow: none;
+    border-color: #fff;
+  }
+
+  button:active { 
+    transform: scale(0.96); 
+  }
+
+  button svg {
+    transition: all 0.3s ease;
+  }
+
+  button:hover svg {
+    stroke: #000;
+  }
+
+  .instructions {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #ffbb99;
+    line-height: 1.6;
+    background: rgba(255, 85, 0, 0.05);
+    border: 1px solid rgba(255, 85, 0, 0.15);
+    padding: 12px;
+    border-radius: 10px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>McDo Sync</h1>
+  <p class="subtitle">Ton planning iOS en 1 clic</p>
+
+  <div class="input-group">
+    <input id="sourceUrl" type="text" placeholder="Colle ton lien EasyAtWork ici">
+  </div>
+  
+  <button id="installBtn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    Ajouter à iOS
+  </button>
+
+  <div class="instructions">
+    <b>1.</b> Colle ton lien EasyAtWork<br>
+    <b>2.</b> Clique sur le bouton<br>
+    <b>3.</b> Valide l'abonnement sur ton iPhone
+  </div>
+</div>
+
+<script>
+  // Ton lien Google Apps Script en arrière-plan
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvA1clsrUgX3AyyUd6J6vhJgULF5Mox1KgC5WkMyvktXYmvRVhUEHAlFhK1wgRcnVnuA/exec";
+
+  document.getElementById('installBtn').addEventListener('click', function() {
+    var url = document.getElementById('sourceUrl').value.trim();
+    
+    if (!url) {
+      alert("N'oublie pas de coller ton lien EasyAtWork !");
+      return;
+    }
+    
+    if (!url.includes('api_token')) {
+      alert("Ce lien ne semble pas valide. Vérifie que tu as bien copié le lien complet.");
+      return;
+    }
+    
+    var btn = this;
+    var originalText = btn.innerHTML;
+    btn.innerHTML = 'GÉNÉRATION...';
+    btn.style.background = 'var(--neon-red)';
+    btn.style.borderColor = 'var(--neon-red)';
+    btn.style.color = '#fff';
+    btn.style.boxShadow = '0 0 25px var(--neon-red)';
+    
+    setTimeout(function() {
+      var encodedUrl = encodeURIComponent(url);
+      var webcalUrl = SCRIPT_URL.replace(/^https/i, 'webcal') + "?sourceUrl=" + encodedUrl;
+      window.location.href = webcalUrl;
+      
+      setTimeout(function() {
+        btn.innerHTML = originalText;
+        btn.style = '';
+      }, 2000);
+    }, 500);
+  });
+</script>
+</body>
+</html>
